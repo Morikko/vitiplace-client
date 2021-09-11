@@ -1,0 +1,164 @@
+<!doctype html>
+
+<head>
+</head>
+
+<body>
+    <div id="container" class="home">
+        <div id='espabo'>
+            <div id='vp-data'>
+                <ul class='onglet'>
+                    <li><a href='/tableau_de_bord.php?s=1' id="onglet_cave" class='selected'>Votre cave</a></li>
+
+
+                    <li><a href='/tableau_de_bord.php?w=1' id="onglet_echeancier">Échéancier</a></li>
+                    <li><a href='/visual-gest.php' id="onglet_visual">Représentation graphique</a></li>
+                    <li><a href='/tableau_de_bord.php?h=1' id="onglet_histo">Historique</a></li>
+                </ul>
+                <div id='stock_en_cours' style='clear:both; position:relative'>
+
+                    <div id="bloc-table">
+                        <table id='table_stock' class='default-table dataTables' border='0' cellpadding='3'
+                            style='width:100%;'>
+                            <thead>
+                                <tr>
+                                    <th class='dataTable-menu'></th>
+                                    <th>Appellation</th>
+                                    <th>Nom du vin</th>
+                                    <th>Millésime</th>
+                                    <th>Type</th>
+                                    <th>Vol.</th>
+                                    <th>Prix</th>
+                                    <th>Stock</th>
+                                    <th>Note</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr id='L_411402' class='odd '>
+                                    <td class='dataTable-menu'>
+                                        <div style='position:relative;'>
+                                            <div class='action-bloc' style='display:none'>
+                                                <a href='#' class='open-menu'>Ouvrir le menu</a>
+                                                <ul class='action-menu' style='display:none'>
+                                                    <li><a href='https://vin.vitiplace.com/vire-clesse/domaine-des-gandines-terroir-de-clesse-247690.php'
+                                                            target='_blank' class='mod-stock'>Modifier</a></li>
+                                                    <li><a href='https://abonne.vitiplace.com/visual-gest.php?ids=411402'
+                                                            target='_self' class='mod-stock'>Emplacement</a></li>
+                                                    <li><a href='#' title='Supprimer cette entr&eacute;e' rel='411402'
+                                                            class='supp-stock'>Supprimer</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class='app'>Viré-Clessé</td>
+                                    <td class='wine_name'><a
+                                            href='https://vin.vitiplace.com/vire-clesse/domaine-des-gandines-terroir-de-clesse-247690.php'
+                                            target='_blank'>Domaine des Gandines - Terroir de Clessé</a></td>
+                                    <td class='mil'>2019</td>
+                                    <td class='robe'><span class='robe robe-2'>2</span></td>
+                                    <td class='vol'>0.75 L</td>
+                                    <td class='prix' style='white-space: nowrap;' data-order='0.00'>
+                                        <div id='val_411402' style='display:inline;'>0.00</div> &euro;
+                                    </td>
+                                    <td style='white-space: nowrap;' class='td-qte'>
+                                        <a href='#'
+                                            onClick="modif_stock('2_411402',411402,'supp',1); return false;"><img
+                                                src='/img/btn_moins.png' border='0' style='margin-right:5px'
+                                                alt='Sortir une bouteille de votre livre de cave'
+                                                title='Sortir une bouteille dans votre livre de cave'></a>
+                                        <span id='2_411402'
+                                            style='margin:0px;padding:0px;display:inline;font-weight:bold;'>2</span>
+                                        <a href='#' onClick="modif_stock('2_411402',411402,'add',1); return false;"><img
+                                                src='/img/btn_plus.png' border='0'
+                                                alt='Rentrer une bouteille dans votre livre de cave'
+                                                title='Rentrer une bouteille dans votre livre de cave'
+                                                style='margin-left:5px'></a>
+                                    </td>
+                                    <td class='noteDgust' rel='247690' style='white-space: nowrap;' data-order='0'>
+                                        <ul class='note-block'>
+                                            <li class='noteLeftOff'>0</li>
+                                            <li class='noteRightOff'>0</li>
+                                            <li class='noteLeftOff'>0</li>
+                                            <li class='noteRightOff'>0</li>
+                                            <li class='noteLeftOff'>0</li>
+                                            <li class='noteRightOff'>0</li>
+                                            <li class='noteLeftOff'>0</li>
+                                            <li class='noteRightOff'>0</li>
+                                            <li class='noteLeftOff'>0</li>
+                                            <li class='noteRightOff'>0</li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr id='L_370166' class='even '>
+                                    <td class='dataTable-menu'>
+                                        <div style='position:relative;'>
+                                            <div class='action-bloc' style='display:none'>
+                                                <a href='#' class='open-menu'>Ouvrir le menu</a>
+                                                <ul class='action-menu' style='display:none'>
+                                                    <li><a href='https://vin.vitiplace.com/vire-clesse/domaine-des-gandines-terroir-de-clesse-224039.php'
+                                                            target='_blank' class='mod-stock'>Modifier</a></li>
+                                                    <li><a href='https://abonne.vitiplace.com/visual-gest.php?ids=370166'
+                                                            target='_self' class='mod-stock'>Emplacement</a></li>
+                                                    <li><a href='#' title='Supprimer cette entr&eacute;e' rel='370166'
+                                                            class='supp-stock'>Supprimer</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class='app'>Viré-Clessé</td>
+                                    <td class='wine_name'><a
+                                            href='https://vin.vitiplace.com/vire-clesse/domaine-des-gandines-terroir-de-clesse-224039.php'
+                                            target='_blank'>Domaine des Gandines - Terroir de Clessé</a></td>
+                                    <td class='mil'>2018</td>
+                                    <td class='robe'><span class='robe robe-2'>2</span></td>
+                                    <td class='vol'>0.75 L</td>
+                                    <td class='prix' style='white-space: nowrap;' data-order='0.00'>
+                                        <div id='val_370166' style='display:inline;'>0.00</div> &euro;
+                                    </td>
+                                    <td style='white-space: nowrap;' class='td-qte'>
+                                        <a href='#'
+                                            onClick="modif_stock('2_370166',370166,'supp',1); return false;"><img
+                                                src='/img/btn_moins.png' border='0' style='margin-right:5px'
+                                                alt='Sortir une bouteille de votre livre de cave'
+                                                title='Sortir une bouteille dans votre livre de cave'></a>
+                                        <span id='2_370166'
+                                            style='margin:0px;padding:0px;display:inline;font-weight:bold;'>1</span>
+                                        <a href='#' onClick="modif_stock('2_370166',370166,'add',1); return false;"><img
+                                                src='/img/btn_plus.png' border='0'
+                                                alt='Rentrer une bouteille dans votre livre de cave'
+                                                title='Rentrer une bouteille dans votre livre de cave'
+                                                style='margin-left:5px'></a>
+                                    </td>
+                                    <td class='noteDgust' rel='224039' style='white-space: nowrap;' data-order='0'>
+                                        <ul class='note-block'>
+                                            <li class='noteLeftOff'>0</li>
+                                            <li class='noteRightOff'>0</li>
+                                            <li class='noteLeftOff'>0</li>
+                                            <li class='noteRightOff'>0</li>
+                                            <li class='noteLeftOff'>0</li>
+                                            <li class='noteRightOff'>0</li>
+                                            <li class='noteLeftOff'>0</li>
+                                            <li class='noteRightOff'>0</li>
+                                            <li class='noteLeftOff'>0</li>
+                                            <li class='noteRightOff'>0</li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div id="goto-visualgest" title="Message" style="display:none;">
+        <p>
+            Vous avez spécifié un emplacement pour ces bouteilles.<br> Merci de préciser laquelle doit être retirée
+            depuis la représentation graphique de votre cave.
+        </p>
+    </div>
+    -->
+</body>
+
+</html>

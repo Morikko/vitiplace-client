@@ -1,0 +1,271 @@
+<!doctype html>
+
+<head>
+    <meta charset="iso-8859-1">
+</head>
+
+<body>
+    <div id="container" class="home">
+        <div id='espabo' class='home'>
+
+            <div id='vp-data'>
+                <ul class='onglet'>
+                    <li><a href='/tableau_de_bord.php?s=1' id="onglet_cave">Votre cave</a></li>
+
+
+                    <li><a href='/tableau_de_bord.php?w=1' id="onglet_echeancier">Échéancier</a></li>
+                    <li><a href='/visual-gest.php' id="onglet_visual" class='selected'>Représentation graphique</a></li>
+                    <li><a href='/tableau_de_bord.php?h=1' id="onglet_histo">Historique</a></li>
+                </ul>
+                <div id='bloc-table'>
+                    <div id="loadingBloc">Chargement en cours...</div>
+
+                    <div id="levator">
+                        <div id="rackset">
+                            <div class="menu-top">
+                                <a id="btn-place-btl" href="#" title="Ranger vos bouteilles dans vos armoires">Ranger
+                                    vos bouteilles</a>
+                            </div>
+
+                            <div class="centralCol-responsive">
+                                <div id="preview">
+                                    <div id="help" style="display:none;">
+                                        <p>
+                                            Pour pouvoir gérer graphiquement...
+                                        </p>
+                                        <p>
+                                            Si n'êtes pas familier...</p>
+                                        <p>
+                                            Dans le cas contraire...
+                                        </p>
+
+                                    </div>
+                                    <div id='box_message' class='box_message_ok msg-box'
+                                        style="display:none !important;"><span>Message de confirmation</span> <a
+                                            title='Fermer' href='#' class='close-msg-box'>Fermer</a></div>
+                                    <h4 id="previewName"></h4>
+                                    <div id="previewRack"></div>
+                                </div>
+                            </div>
+
+                            <div id="racklist">
+                                <h3>Liste des armoires</h3>
+                                <ul>
+                                    <li class="notabene">Seules les armoires vides peuvent être modifiées</li>
+                                    <li class='rack-li'><a href='#'
+                                            title="Vous ne pouvez pas modifier cette armoire car elle n'est pas vide"
+                                            class='notempty'
+                                            onclick='alert("Pour modifier cette armoire vous devez auparavant en retirer toutes les bouteilles."); return false;'>Cave</a>
+                                    </li>
+                                    <li class='rack-li'><a href='#'
+                                            title="Vous ne pouvez pas modifier cette armoire car elle n'est pas vide"
+                                            class='notempty'
+                                            onclick='alert("Pour modifier cette armoire vous devez auparavant en retirer toutes les bouteilles."); return false;'>
+                                            Carton 1</a></li>
+                                    <li class='rack-li'><a href='#'
+                                            title="Vous ne pouvez pas modifier cette armoire car elle n'est pas vide"
+                                            class='notempty'
+                                            onclick='alert("Pour modifier cette armoire vous devez auparavant en retirer toutes les bouteilles."); return false;'>
+                                            Carton 2</a></li>
+                                    <li class='rack-li'><a href='#'
+                                            title="Vous ne pouvez pas modifier cette armoire car elle n'est pas vide"
+                                            class='notempty'
+                                            onclick='alert("Pour modifier cette armoire vous devez auparavant en retirer toutes les bouteilles."); return false;'>Carton
+                                            3</a>
+                                    </li>
+                                    <li style="width:100%; margin-bottom:0px;">
+                                        <div class="div4button" style="margin:16px 0;">
+                                            <input type="button" class="pink" id="newRackBtn" value="Nouvelle armoire">
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+
+
+                            <form action="#" name="formrack" id="formrack" class="std-vertical">
+                                <h3>Paramètres de l'armoire</h3>
+                                <div id="infoFormRack">
+                                    <p>Vous pouvez :</p>
+                                    <p> - Cliquer sur le bouton "Nouvelle armoire" pour ajouter une armoire à votre cave
+                                    </p>
+                                    <p> - Cliquer sur le nom d'une armoire pour modifier ses paramètres ou sur la croix
+                                        pour la supprimer.</p>
+                                    <p>Pour ranger vos bouteilles dans vos armoires, cliquer sur "Ranger vos bouteilles"
+                                        en haut à gauche.</p>
+                                    <p>Besoin d'<a href="https://www.vitiplace.com/pdf/aide-visualgest.pdf"
+                                            target="_blanc">aide</a> ?</p>
+                                </div>
+                                <ul>
+                                    <li><label for="rackname" class="libelle">Nom de l'armoire</label><input type="text"
+                                            name='rackname' id='rackname' value=""></li>
+                                    <li><label for="rowrack" class="libelle">Nombre de lignes</label><input type="text"
+                                            name='rowrack' id='rowrack' size="4" value="1"></li>
+                                    <li><label for="colrack" class="libelle">Nombre de colonnes</label><input
+                                            type="text" name='colrack' id='colrack' size="4" value="1"></li>
+                                    <li>
+                                        <label for="hdiv" class="libelle">Nombre de séparations horizontales</label>
+                                        <select name="hdiv" id="hdiv">
+                                            <option value="0">0</option>
+                                        </select>
+                                    </li>
+                                    <li>
+                                        <label for="vdiv" class="libelle">Nombre de séparations verticales</label>
+                                        <select name="vdiv" id="vdiv">
+                                            <option value="0">0</option>
+                                        </select>
+                                    </li>
+                                    <li style="width:100%; margin-bottom:0px;">
+                                        <div class="div4button" style="margin:16px 0;">
+                                            <!--<input type="button" class="cancelBtn" value="Annuler" id="closeForm">-->
+                                            <input type="submit" class="pink" id="setRack" value="Créer">
+                                            <input type="submit" class="pink" id="updtRack" value="Modifier"
+                                                style="display:none;">
+                                        </div>
+                                    </li>
+                                </ul>
+                            </form>
+                        </div>
+
+
+                        <div id="btlSet">
+                            <div class="menu-top">
+                                <a id="btn-updt-rack" href="#" alt="Ajouter ou modifier une armoire">Configurer vos
+                                    armoires</a>
+                                <div id="btl-search">
+                                    Rechercher toutes les bouteilles de : <input type="text" id="btl-search-field"
+                                        value="" placeholder="Nom du vin">
+                                    <a title="Réinitialiser la recherche" class="resetSearch" href="#">Réinitialiser la
+                                        recherche</a>
+                                </div>
+
+                            </div>
+
+                            <div class="centralCol-responsive">
+                                <div id="cave">
+                                    <div id="btl_msgBox" class="box_message_ok msg-box" style="display:none;">
+                                        <span></span> <a title="Fermer" href="#" class="close-msg-box">Fermer</a>
+                                    </div>
+
+                                    <div class='bottle-box'>
+                                        <h4>Carton 1</h4>
+                                        <table style='border-collapse:separate; border-spacing:1px;'>
+                                            <tr>
+                                                <th>&nbsp;</th>
+                                                <th>I</th>
+                                                <th>II</th>
+                                                <th>III</th>
+                                            </tr>
+                                            <tr>
+                                                <td class='rownumber'>1</td>
+                                                <td id='8806_1_1'>
+                                                    <div class='casier droppable busy-placement'>
+                                                        <div id='300139' class='draggable verre verre-1'
+                                                            rel='300139_1_8806_1_1'>&nbsp;</div>
+                                                    </div>
+                                                </td>
+                                                <td id='8806_1_2'>
+                                                    <div class='casier droppable busy-placement'>
+                                                        <div id='395529' class='draggable verre verre-1'
+                                                            rel='395529_1_8806_1_2'>&nbsp;</div>
+                                                    </div>
+                                                </td>
+                                                <td id='8806_1_3'>
+                                                    <div class='casier droppable'></div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class='rownumber'>2</td>
+                                                <td id='8806_2_1'>
+                                                    <div class='casier droppable busy-placement'>
+                                                        <div id='188030' class='draggable verre verre-1'
+                                                            rel='188030_1_8806_2_1'>&nbsp;</div>
+                                                    </div>
+                                                </td>
+                                                <td id='8806_2_2'>
+                                                    <div class='casier droppable busy-placement'>
+                                                        <div id='395528' class='draggable verre verre-2'
+                                                            rel='395528_2_8806_2_2'>&nbsp;</div>
+                                                    </div>
+                                                </td>
+                                                <td id='8806_2_3'>
+                                                    <div class='casier droppable busy-placement'>
+                                                        <div id='168435' class='draggable verre verre-2'
+                                                            rel='168435_2_8806_2_3'>&nbsp;</div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div id="unPlacedList">
+                                <h3>Bouteilles non rangées</h3>
+                                <ul id='list_wine'>
+                                    <li id='442417' class='draggable' rel='442417_2'>
+                                        <p style='font-weight:bold;'><span class='qty qty-look'>1</span><span
+                                                class='qty-look'>x&nbsp;</span> Fruitière vinicole d'Arbois - Savagnin -
+                                            <span class='pink-txt'>2016</span>
+                                        </p>
+                                        <p class='typenapp'>
+                                            <span class='robe robe-2' title='Blanc'>Blanc</span> Côtes du Jura
+                                        </p>
+                                    </li>
+                                    <li id='442418' class='draggable' rel='442418_2'>
+                                        <p style='font-weight:bold;'><span class='qty qty-look'>2</span><span
+                                                class='qty-look'>x&nbsp;</span> Fruitière Vinicole d'Arbois - Cuvée
+                                            Béthanie - <span class='pink-txt'>2016</span></p>
+                                        <p class='typenapp'>
+                                            <span class='robe robe-2' title='Blanc'>Blanc</span> Arbois
+                                        </p>
+                                    </li>
+                                </ul>
+                            </div>
+
+
+                            <div id='infovin' class="default-txt">
+                                <img src="/img/spinner.gif" border="0" alt="0" id="visualGestSpinner">
+                                <p id="defaultMsg">Cliquer sur un emplacement pour obtenir les informations sur le vin
+                                    qu'il contient</p>
+                                <div id="blocInfo">
+                                    <div style="margin:20px 10px">
+                                        <div class='sticker-box'>
+                                            <div class='picture-frame'>
+                                                <img src='/images/etiquettes/thumbs//default_mini_sticker.png'
+                                                    border='0' class='sticker' />
+                                            </div>
+                                            <img src='/img/ombre_mini_sticker.png' border='0' alt='' />
+                                        </div>
+                                        <span id='winename'></span> <span id='mil'></span> <br>
+                                        <p class="typenapp">
+                                            <span id='winetype'></span>
+                                            <span id='wineapp'></span>
+                                        </p>
+                                        <table id="echeancier" class="default-table">
+                                            <tr>
+                                                <th>Dès</th>
+                                                <th>Apogée</th>
+                                                <th>Limite</th>
+                                            </tr>
+                                            <tr class="even">
+                                                <td id="from"></td>
+                                                <td id="apg"></td>
+                                                <td id="limit"></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <button id="exit" rel="">Sortir cette bouteille de votre cave</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
