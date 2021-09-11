@@ -32,7 +32,6 @@ class TestWebsiteView:
 
         return viti_view
 
-    @pytest.slow
     def test_login(self) -> None:
         viti_view = VitiplaceView()
         assert viti_view.is_login == False
@@ -59,7 +58,6 @@ class TestWebsiteView:
             viti_view.login()
             assert viti_view.is_login == True
 
-    @pytest.slow
     def test_get_board_page(self, viti_logged_view: VitiplaceView) -> None:
         page = viti_logged_view.get_board_page()
         assert len(page) > 0
@@ -67,19 +65,16 @@ class TestWebsiteView:
         page = viti_logged_view.get_board_page(with_history=True)
         assert len(page) > 0
 
-    @pytest.slow
     def test_get_visual_page(self, viti_logged_view: VitiplaceView) -> None:
         page = viti_logged_view.get_visual_page()
         assert len(page) > 0
 
-    @pytest.slow
     def test_get_wine_information(self, viti_logged_view: VitiplaceView) -> None:
         # FIXME: Make agnostic
         wine_id = 395529
         wine_info = viti_logged_view.get_wine_information(id=wine_id)
         assert "vin" in wine_info
 
-    @pytest.slow
     def test_get_page(self, viti_logged_view: VitiplaceView) -> None:
         # Public URL
         wine_page_url = "https://vin.vitiplace.com/sauternes/yquem-284.php"
