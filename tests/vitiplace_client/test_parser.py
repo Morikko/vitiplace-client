@@ -57,7 +57,7 @@ class TestParser:
 
     def test_get_wine_ref(self, wine_information_api):
         assert parser.get_wine_ref(wine_information_api) == (
-            "https://vin.vitiplace.com/controguerra/pietramore-cerasuolo-d-abruzzo-247696.php",
+            "https://vin.vitiplace.com/vire-clesse/domaine-des-gandines-terroir-de-clesse-247690.php",
             "2018",
         )
 

@@ -4,6 +4,8 @@ import os
 
 from typing import TypedDict, Optional
 
+from vitiplace_client.model import WineInfoApi
+
 VITIPLACE_CLIENT_EMAIL_VAR_NAME = "VITIPLACE_CLIENT_EMAIL"
 VITIPLACE_CLIENT_PASSWORD_VAR_NAME = "VITIPLACE_CLIENT_PASSWORD"
 
