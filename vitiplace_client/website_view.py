@@ -16,29 +16,6 @@ VISUAL_URL = f"{BASE_ACCOUNT_URL}/visual-gest.php"
 LOGIN_URL = f"{BASE_URL}/progs/identification.php"
 WINE_INFO_URL = f"{BASE_URL}/progs/cellar-center.php"
 
-API_NO_YEAR_PLACEHOLDER = "-"
-
-
-# "from" is a restricted python keyword
-WineInfoApiRestricted = TypedDict("WineInfoApiRestricted", {"from": int})
-
-
-class WineInfoApi(TypedDict, WineInfoApiRestricted):
-    idv: int
-    nom: str
-    url: str
-    app: str
-    idtype: str
-    libtype: str
-    tag: str
-    mil: int
-    apg: str
-    limit: str
-
-
-class WineInfoResponseApi(TypedDict):
-    vin: WineInfoApi
-
 
 class VitiplaceView:
     def __init__(self, email: Optional[str] = None, password: Optional[str] = None):
@@ -70,10 +47,18 @@ class VitiplaceView:
         resp.raise_for_status()
         self.is_login = True
 
-    def get_board_page(self, with_history: bool = False) -> str:
+    def get_board_page(self) -> str:
         self.ensure_login()
         resp = self.session.get(
-            BOARD_URL + ("?h=1" if with_history else ""),
+            BOARD_URL,
+        )
+        resp.raise_for_status()
+        return resp.text
+
+    def get_history_page(self) -> str:
+        self.ensure_login()
+        resp = self.session.get(
+            BOARD_URL + "?h=1",
         )
         resp.raise_for_status()
         return resp.text
@@ -84,7 +69,7 @@ class VitiplaceView:
         resp.raise_for_status()
         return resp.text
 
-    def get_wine_information(self, id: int) -> WineInfoResponseApi:
+    def get_wine_information(self, id: int) -> WineInfoApi:
         """
         Example:
             {
