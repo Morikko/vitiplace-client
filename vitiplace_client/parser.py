@@ -6,6 +6,7 @@ from vitiplace_client.model import (
     WineMillesime,
     WineInfoApi,
     API_NO_YEAR_PLACEHOLDER,
+    WinePurchaseHistory,
 )
 
 # An id given by Vitiplace for a wine specific per year
@@ -26,14 +27,50 @@ def get_id_from_url(url: str) -> int:
     return int(url[url.rindex("-") + 1 : url.rindex(".php")])
 
 
+def get_purchase_history(bs_page: bs4.BeautifulSoup) -> list[WinePurchaseHistory]:
+    dates = bs_page.select('td[id^="td_date_"]')
+    millesimes = bs_page.select('td[id^="td_mil_"]')
+    volumes = bs_page.select('td[id^="td_vol_"]')
+    quantities = bs_page.select('td[id^="td_nb_"]')
+    unitary_prices = bs_page.select('td[id^="td_pu_"] div[id^="pu_"]')
+    comments = bs_page.select('td[id^="td_cmt_"]')
+
+    wine_purchase_histories: list[WinePurchaseHistory] = []
+    for (
+        raw_date,
+        raw_millesime,
+        raw_volume,
+        raw_quantity,
+        raw_unitary_price,
+        raw_comment,
+    ) in zip(dates, millesimes, volumes, quantities, unitary_prices, comments):
+        date = raw_date.text.strip()
+        millesime = int(raw_millesime.text.strip())
+        volume = float(raw_volume.text.strip())
+        quantity = int(raw_quantity.text.strip())
+        unitary_price = float(raw_unitary_price.text.strip())
+        comment = raw_comment.text.strip()
+        wine_purchase_histories.append(
+            WinePurchaseHistory(
+                date=date,
+                millesime=millesime,
+                volume=volume,
+                quantity=quantity,
+                unitary_price=unitary_price,
+                comment=comment if comment != "" else None,
+            )
+        )
+
+    return wine_purchase_histories
+
+
 def get_wine_with_purchase_history_from_wine_page(text_page: str) -> Wine:
     page = bs4.BeautifulSoup(text_page, "html.parser")
 
     url = page.select_one('link[rel="canonical"]').attrs["href"]
     id = get_id_from_url(url)
 
-    # TODO:
-    purchase_history = []
+    purchase_history = get_purchase_history(page)
 
     return Wine(
         id=id,

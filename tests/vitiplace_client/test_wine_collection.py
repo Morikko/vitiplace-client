@@ -62,6 +62,15 @@ class TestWineCollection:
                         "quantity": 8,
                     }
                 },
-                "purchase_history": [],
+                "purchase_history": [
+                    {
+                        "comment": None,
+                        "date": "12/10/2020",
+                        "millesime": 2018,
+                        "quantity": 6,
+                        "unitary_price": 0.0,
+                        "volume": 0.75,
+                    }
+                ],
             },
         ]
