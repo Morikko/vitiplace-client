@@ -19,7 +19,6 @@ class WineCollection:
             vitiplace_view.get_history_page()
         )
         wine_urls = set(board_urls) | set(history_urls)
-        print(wine_urls)
 
         # Get wine identity and the purchase history
         # Do not get millesimes as it is done by JS
