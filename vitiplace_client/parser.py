@@ -1,7 +1,12 @@
 import bs4
-from typing import NamedTuple
+from typing import NamedTuple, Optional
 
-from vitiplace_client.model import Wine
+from vitiplace_client.model import (
+    Wine,
+    WineMillesime,
+    WineInfoApi,
+    API_NO_YEAR_PLACEHOLDER,
+)
 
 # An id given by Vitiplace for a wine specific per year
 WineReferenceId = str
@@ -9,17 +14,37 @@ WineReferenceId = str
 UNKNOWN = "unknown"
 
 
-def extract_wine_list_from_board_page(text_page: str) -> list[tuple[str, str]]:
+def extract_urls_from_list_page(text_page: str) -> list[str]:
     WINE_LINK_CSS_REF = "#table_stock .wine_name a"
 
     page = bs4.BeautifulSoup(text_page, "html.parser")
     wine_tags = page.select(WINE_LINK_CSS_REF)
-    return [(wine.text, wine.attrs["href"]) for wine in wine_tags]
+    return [wine.attrs["href"] for wine in wine_tags]
 
 
-def get_wine_information_from_page(page_url: str) -> Wine:
-    # TODO
-    ...
+def get_id_from_url(url: str) -> int:
+    return int(url[url.rindex("-") + 1 : url.rindex(".php")])
+
+
+def get_wine_with_purchase_history_from_wine_page(text_page: str) -> Wine:
+    page = bs4.BeautifulSoup(text_page, "html.parser")
+
+    url = page.select('link[rel="canonical"]').href
+    id = get_id_from_url(url)
+
+    # TODO:
+    purchase_history = []
+
+    return Wine(
+        id=id,
+        url=url,
+        name=page.select("#nomvin"),
+        region=page.select("#app"),
+        appellation=page.select("#app"),
+        type=page.select("#robe"),
+        millesimes={},
+        purchase_history=purchase_history,
+    )
 
 
 class WineIdLocation(NamedTuple):
@@ -53,6 +78,36 @@ def extract_wine_locations_from_visual_page(visual_page: str) -> list[WineIdLoca
     return wine_location_list
 
 
-def get_wine_id_from_box_id(id: int) -> str:
-    # TODO:
-    ...
+def get_wine_ref(
+    wine_information: WineInfoApi,
+) -> tuple[str, int]:
+    """
+    Return the url and millesime
+    """
+    details = wine_information["vin"]
+
+    return (
+        details["url"],
+        details["mil"],
+    )
+
+
+def get_year_from_string(year: str) -> Optional[int]:
+    return int(year) if year != API_NO_YEAR_PLACEHOLDER else None
+
+
+def get_wine_millesime(wine_information: WineInfoApi) -> WineMillesime:
+    details = wine_information["vin"]
+
+    millesime = get_year_from_string(details["mil"])
+    if not millesime:
+        raise ValueError("Should not be None")
+
+    return WineMillesime(
+        millesime=millesime,
+        ready_year=get_year_from_string(details["from"]),
+        best_year=get_year_from_string(details["apg"]),
+        limit_year=get_year_from_string(details["limit"]),
+        locations={},
+        quantity=0,
+    )
