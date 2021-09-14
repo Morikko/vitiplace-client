@@ -62,7 +62,7 @@ class TestWebsiteView:
         page = viti_logged_view.get_board_page()
         assert len(page) > 0
 
-        page = viti_logged_view.get_board_page(with_history=True)
+        page = viti_logged_view.get_history_page()
         assert len(page) > 0
 
     def test_get_visual_page(self, viti_logged_view: VitiplaceView) -> None:
