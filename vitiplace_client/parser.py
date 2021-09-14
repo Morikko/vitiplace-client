@@ -29,7 +29,7 @@ def get_id_from_url(url: str) -> int:
 def get_wine_with_purchase_history_from_wine_page(text_page: str) -> Wine:
     page = bs4.BeautifulSoup(text_page, "html.parser")
 
-    url = page.select('link[rel="canonical"]').href
+    url = page.select_one('link[rel="canonical"]').attrs["href"]
     id = get_id_from_url(url)
 
     # TODO:
@@ -38,10 +38,10 @@ def get_wine_with_purchase_history_from_wine_page(text_page: str) -> Wine:
     return Wine(
         id=id,
         url=url,
-        name=page.select("#nomvin"),
-        region=page.select("#app"),
-        appellation=page.select("#app"),
-        type=page.select("#robe"),
+        name=page.select_one("#nomvin").text,
+        region=page.select_one("#region").text,
+        appellation=page.select_one("#app").text,
+        type=page.select_one("#robe").text,
         millesimes={},
         purchase_history=purchase_history,
     )

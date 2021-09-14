@@ -1,35 +1,7 @@
-import pytest
-import json
-from pathlib import Path
-
 from vitiplace_client import parser, model
-
-FIXTURES_PATH = Path(__file__).parent / "__fixtures__"
-
-
-def load_html_page(page_name: str) -> str:
-    with open(FIXTURES_PATH / page_name) as fp:
-        return fp.read()
-
-
-def load_json(page_name: str) -> str:
-    with open(FIXTURES_PATH / page_name) as fp:
-        return json.load(fp)
 
 
 class TestParser:
-    @pytest.fixture
-    def board_page(self) -> str:
-        return load_html_page("board_page.html")
-
-    @pytest.fixture
-    def visual_page(self) -> str:
-        return load_html_page("visual_page.html")
-
-    @pytest.fixture
-    def wine_information_api(self) -> str:
-        return load_json("wine_information.json")
-
     def test_extract_urls_from_list_page(self, board_page: str):
         actual_wine_list = parser.extract_urls_from_list_page(board_page)
 
@@ -56,6 +28,21 @@ class TestParser:
         ]
 
         assert actual_wine_boxes == expected_wine_boxes
+
+    def test_get_wine_with_purchase_history_from_wine_page(self, wine_page):
+        actual_wine = parser.get_wine_with_purchase_history_from_wine_page(wine_page)
+        expected_wine = model.Wine(
+            id=247690,
+            url="https://vin.vitiplace.com/vire-clesse/domaine-des-gandines-terroir-de-clesse-247690.php",
+            name="Pietramore - Cerasuolo d’Abruzzo",
+            region="Abruzzes",
+            appellation="Controguerra",
+            type="Rosé",
+            millesimes={},
+            purchase_history=[],
+        )
+
+        assert actual_wine == expected_wine
 
     def test_get_id_from_url(self):
         actual_id = parser.get_id_from_url(
