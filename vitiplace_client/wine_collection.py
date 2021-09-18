@@ -10,12 +10,44 @@ class WineCollection:
         with open(path, "w") as fp:
             json.dump(self.wines, fp)
 
+    @classmethod
+    def from_file(cls, path: str) -> "WineCollection":
+        """
+        No check is done on the loaded data.
 
-class VitiplaceWineCollection:
-    def __init__(
-        self,
+        Please verify the data comes from `cls.backup()` or respects
+        the data models in `vitiplace_client.model`.
+        """
+        with open(path) as fp:
+            return cls(wines=json.load(fp))
+
+    @classmethod
+    def from_vitiplace(
+        cls,
         email: str = None,
         password: str = None,
+    ) -> "WineCollection":
+        vitiplace_wine_collection = VitiplaceWineCollection(
+            email=email, password=password
+        )
+        return vitiplace_wine_collection.fetch_wine_collection()
+
+
+class VitiplaceWineCollection:
+    """
+    An helper class to create a wine collection from an account
+    on `vitiplace.com`.
+
+    The pages fetched on the website are cached and could be reused
+    on repeated execution.
+    """
+
+    def __init__(
+        self,
+        # Set Credentials or use env vars
+        email: str = None,
+        password: str = None,
+        # Avoid to recompute some steps
         wines_by_url=None,
         cache_wine_details: dict[int, model.WineInfoApi] = None,
     ):
@@ -80,3 +112,8 @@ class VitiplaceWineCollection:
         return WineCollection(
             wines=sorted(list(self.wines_by_url.values()), key=lambda d: d["id"])
         )
+
+    def fetch_wine_collection(self):
+        self.fetch_wines_by_url()
+        self.fetch_wine_locations()
+        return self.get_wine_collection()

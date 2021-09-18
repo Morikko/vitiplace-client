@@ -1,6 +1,6 @@
 from unittest import mock
 
-from vitiplace_client import wine_collection, website_view
+from vitiplace_client import wine_collection
 
 
 class TestWineCollection:
@@ -43,7 +43,16 @@ class TestWineCollection:
                 "appellation": "Controguerra",
                 "type": "Rosé",
                 "millesimes": {},
-                "purchase_history": [],
+                "purchase_history": [
+                    {
+                        "comment": None,
+                        "date": "12/10/2020",
+                        "millesime": 2018,
+                        "quantity": 6,
+                        "unitary_price": 0.0,
+                        "volume": 0.75,
+                    }
+                ],
             },
             {
                 "id": 247690,
