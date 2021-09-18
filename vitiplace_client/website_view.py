@@ -1,8 +1,7 @@
 import requests
-import datetime
 import os
 
-from typing import TypedDict, Optional
+from typing import Optional
 
 from vitiplace_client.model import WineInfoApi
 
@@ -78,7 +77,7 @@ class VitiplaceView:
                 "vin": {
                     "idv": "247696",
                     "nom": "Pietramore - Cerasuolo dAbruzzo",
-                    "url": "https://vin.vitiplace.com/controguerra/pietramore-cerasuolo-d-abruzzo-247696.php",
+                    "url": "https://vin.vitiplace.com/controguerra/pietramore-cerasuolo-d-abruzzo-247696.php", # noqa: E501
                     "app": "Controguerra",
                     "idtype": "3",
                     "libtype": "Rosé",

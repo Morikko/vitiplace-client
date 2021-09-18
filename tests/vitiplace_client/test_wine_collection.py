@@ -13,8 +13,8 @@ class TestWineCollection:
         visual_page,
         wine_information_api,
     ):
-        first_url = "https://vin.vitiplace.com/vire-clesse/domaine-des-gandines-terroir-de-clesse-247690.php"
-        second_url = "https://vin.vitiplace.com/vire-clesse/domaine-des-gandines-terroir-de-clesse-224039.php"
+        first_url = "https://vin.vitiplace.com/vire-clesse/domaine-des-gandines-terroir-de-clesse-247690.php"  # noqa: E501
+        second_url = "https://vin.vitiplace.com/vire-clesse/domaine-des-gandines-terroir-de-clesse-224039.php"  # noqa: E501
         instance = MockVitiplaceView.return_value
         instance.get_board_page.return_value = board_page
         instance.get_history_page.return_value = board_page
@@ -37,7 +37,7 @@ class TestWineCollection:
         assert actual_wine_collection.wines == [
             {
                 "id": 224039,
-                "url": "https://vin.vitiplace.com/vire-clesse/domaine-des-gandines-terroir-de-clesse-224039.php",
+                "url": "https://vin.vitiplace.com/vire-clesse/domaine-des-gandines-terroir-de-clesse-224039.php",  # noqa: E501
                 "name": "Pietramore - Cerasuolo d’Abruzzo",
                 "region": "Abruzzes",
                 "appellation": "Controguerra",
@@ -56,7 +56,7 @@ class TestWineCollection:
             },
             {
                 "id": 247690,
-                "url": "https://vin.vitiplace.com/vire-clesse/domaine-des-gandines-terroir-de-clesse-247690.php",
+                "url": "https://vin.vitiplace.com/vire-clesse/domaine-des-gandines-terroir-de-clesse-247690.php",  # noqa: E501
                 "name": "Pietramore - Cerasuolo d’Abruzzo",
                 "region": "Abruzzes",
                 "appellation": "Controguerra",

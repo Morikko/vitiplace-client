@@ -24,7 +24,9 @@ def extract_urls_from_list_page(text_page: str) -> list[str]:
 
 
 def get_id_from_url(url: str) -> int:
-    return int(url[url.rindex("-") + 1 : url.rindex(".php")])
+    start = url.rindex("-") + 1
+    end = url.rindex(".php")
+    return int(url[start:end])
 
 
 def get_purchase_history(bs_page: bs4.BeautifulSoup) -> list[WinePurchaseHistory]:

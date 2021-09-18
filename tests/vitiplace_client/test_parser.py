@@ -8,8 +8,8 @@ class TestParser:
         assert len(actual_wine_list) == 2
 
         expected_wine_list = [
-            "https://vin.vitiplace.com/vire-clesse/domaine-des-gandines-terroir-de-clesse-247690.php",
-            "https://vin.vitiplace.com/vire-clesse/domaine-des-gandines-terroir-de-clesse-224039.php",
+            "https://vin.vitiplace.com/vire-clesse/domaine-des-gandines-terroir-de-clesse-247690.php",  # noqa: E501
+            "https://vin.vitiplace.com/vire-clesse/domaine-des-gandines-terroir-de-clesse-224039.php",  # noqa: E501
         ]
         assert expected_wine_list == actual_wine_list
 
@@ -37,7 +37,7 @@ class TestParser:
         )
         expected_wine = model.Wine(
             id=247690,
-            url="https://vin.vitiplace.com/vire-clesse/domaine-des-gandines-terroir-de-clesse-247690.php",
+            url="https://vin.vitiplace.com/vire-clesse/domaine-des-gandines-terroir-de-clesse-247690.php",  # noqa: E501
             name="Pietramore - Cerasuolo d’Abruzzo",
             region="Abruzzes",
             appellation="Controguerra",
@@ -84,18 +84,18 @@ class TestParser:
 
     def test_get_id_from_url(self):
         actual_id = parser.get_id_from_url(
-            "https://vin.vitiplace.com/vire-clesse/domaine-des-gandines-terroir-de-clesse-224039.php"
+            "https://vin.vitiplace.com/vire-clesse/domaine-des-gandines-terroir-de-clesse-224039.php"  # noqa: E501
         )
 
         assert actual_id == 224039
 
     def test_get_year_from_string(self):
-        assert 2020 == parser.get_year_from_string("2020")
-        assert None == parser.get_year_from_string(model.API_NO_YEAR_PLACEHOLDER)
+        assert parser.get_year_from_string("2020") == 2020
+        assert parser.get_year_from_string(model.API_NO_YEAR_PLACEHOLDER) is None
 
     def test_get_wine_ref(self, wine_information_api):
         assert parser.get_wine_ref(wine_information_api) == (
-            "https://vin.vitiplace.com/vire-clesse/domaine-des-gandines-terroir-de-clesse-247690.php",
+            "https://vin.vitiplace.com/vire-clesse/domaine-des-gandines-terroir-de-clesse-247690.php",  # noqa: E501
             "2018",
         )
 

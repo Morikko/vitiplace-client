@@ -34,10 +34,10 @@ class TestWebsiteView:
 
     def test_login(self) -> None:
         viti_view = VitiplaceView()
-        assert viti_view.is_login == False
+        assert viti_view.is_login is False
 
         viti_view.login()
-        assert viti_view.is_login == True
+        assert viti_view.is_login is True
 
         email = os.environ[VITIPLACE_CLIENT_EMAIL_VAR_NAME]
         password = os.environ[VITIPLACE_CLIENT_PASSWORD_VAR_NAME]
@@ -56,7 +56,7 @@ class TestWebsiteView:
 
             viti_view = VitiplaceView(email=email, password=password)
             viti_view.login()
-            assert viti_view.is_login == True
+            assert viti_view.is_login is True
 
     def test_get_board_page(self, viti_logged_view: VitiplaceView) -> None:
         page = viti_logged_view.get_board_page()
