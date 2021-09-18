@@ -26,8 +26,13 @@ def visual_page() -> str:
 
 
 @pytest.fixture
-def wine_page() -> str:
-    return load_html_page("wine_page.html")
+def custom_wine_page() -> str:
+    return load_html_page("custom_wine_page.html")
+
+
+@pytest.fixture
+def official_wine_page() -> str:
+    return load_html_page("official_wine_page.html")
 
 
 @pytest.fixture

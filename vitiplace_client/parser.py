@@ -72,13 +72,25 @@ def get_wine_with_purchase_history_from_wine_page(text_page: str) -> Wine:
 
     purchase_history = get_purchase_history(page)
 
+    if "id='nomvin'" in text_page:
+        name = page.select_one("#nomvin").text
+        region = page.select_one("#region").text
+        appellation = page.select_one("#app").text
+        type = page.select_one("#robe").text
+    else:
+        name = page.select_one("#descvin h2").text.strip()
+        rows = page.select("dl dd")
+        appellation = rows[0].text
+        region = rows[1].text
+        type = rows[2].find(text=True, recursive=False)
+
     return Wine(
         id=id,
         url=url,
-        name=page.select_one("#nomvin").text,
-        region=page.select_one("#region").text,
-        appellation=page.select_one("#app").text,
-        type=page.select_one("#robe").text,
+        name=name,
+        region=region,
+        appellation=appellation,
+        type=type,
         millesimes={},
         purchase_history=purchase_history,
     )
@@ -136,9 +148,8 @@ def get_year_from_string(year: str) -> Optional[int]:
 def get_wine_millesime(wine_information: WineInfoApi) -> WineMillesime:
     details = wine_information["vin"]
 
-    millesime = get_year_from_string(details["mil"])
-    if not millesime:
-        raise ValueError("Should not be None")
+    # No millesime bottle
+    millesime = get_year_from_string(details["mil"]) or 0
 
     return WineMillesime(
         millesime=millesime,

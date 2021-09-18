@@ -9,7 +9,7 @@ class TestWineCollection:
         self,
         MockVitiplaceView,
         board_page,
-        wine_page,
+        custom_wine_page,
         visual_page,
         wine_information_api,
     ):
@@ -21,12 +21,12 @@ class TestWineCollection:
 
         def get_wine_page(url):
             if url == second_url:
-                return wine_page.replace(
+                return custom_wine_page.replace(
                     first_url,
                     second_url,
                 )
             else:
-                return wine_page
+                return custom_wine_page
 
         instance.get_page.side_effect = get_wine_page
         instance.get_visual_page.return_value = visual_page

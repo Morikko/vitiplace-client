@@ -29,8 +29,12 @@ class TestParser:
 
         assert actual_wine_boxes == expected_wine_boxes
 
-    def test_get_wine_with_purchase_history_from_wine_page(self, wine_page):
-        actual_wine = parser.get_wine_with_purchase_history_from_wine_page(wine_page)
+    def test_get_wine_with_purchase_history_from_wine_page(
+        self, custom_wine_page, official_wine_page
+    ):
+        actual_wine = parser.get_wine_with_purchase_history_from_wine_page(
+            custom_wine_page
+        )
         expected_wine = model.Wine(
             id=247690,
             url="https://vin.vitiplace.com/vire-clesse/domaine-des-gandines-terroir-de-clesse-247690.php",
@@ -45,6 +49,31 @@ class TestParser:
                     "date": "12/10/2020",
                     "millesime": 2018,
                     "quantity": 6,
+                    "unitary_price": 0.0,
+                    "volume": 0.75,
+                }
+            ],
+        )
+
+        assert actual_wine == expected_wine
+
+        actual_wine = parser.get_wine_with_purchase_history_from_wine_page(
+            official_wine_page
+        )
+        expected_wine = model.Wine(
+            id=4923,
+            url="https://vin.vitiplace.com/cotes-de-bourg/bois-de-tau-4923.php",
+            name="Château du Bois de Tau",
+            region="Bordelais, France",
+            appellation="Côtes de Bourg",
+            type="Rouge",
+            millesimes={},
+            purchase_history=[
+                {
+                    "comment": None,
+                    "date": "01/04/2018",
+                    "millesime": 1993,
+                    "quantity": 0,
                     "unitary_price": 0.0,
                     "volume": 0.75,
                 }
