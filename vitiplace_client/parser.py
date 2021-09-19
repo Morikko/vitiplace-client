@@ -131,7 +131,7 @@ def extract_wine_locations_from_visual_page(visual_page: str) -> list[WineIdLoca
 
 def get_wine_ref(
     wine_information: WineInfoApi,
-) -> tuple[str, int]:
+) -> tuple[str, str]:
     """
     Return the url and millesime
     """
