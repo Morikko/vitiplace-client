@@ -1,5 +1,5 @@
 import bs4
-from typing import NamedTuple, Optional
+from typing import NamedTuple, Optional, List, Tuple
 
 from vitiplace_client.model import (
     Wine,
@@ -15,7 +15,7 @@ WineReferenceId = str
 UNKNOWN = "unknown"
 
 
-def extract_urls_from_list_page(text_page: str) -> list[str]:
+def extract_urls_from_list_page(text_page: str) -> List[str]:
     WINE_LINK_CSS_REF = "#table_stock .wine_name a"
 
     page = bs4.BeautifulSoup(text_page, "html.parser")
@@ -29,7 +29,7 @@ def get_id_from_url(url: str) -> int:
     return int(url[start:end])
 
 
-def get_purchase_history(bs_page: bs4.BeautifulSoup) -> list[WinePurchaseHistory]:
+def get_purchase_history(bs_page: bs4.BeautifulSoup) -> List[WinePurchaseHistory]:
     dates = bs_page.select('td[id^="td_date_"]')
     millesimes = bs_page.select('td[id^="td_mil_"]')
     volumes = bs_page.select('td[id^="td_vol_"]')
@@ -37,7 +37,7 @@ def get_purchase_history(bs_page: bs4.BeautifulSoup) -> list[WinePurchaseHistory
     unitary_prices = bs_page.select('td[id^="td_pu_"] div[id^="pu_"]')
     comments = bs_page.select('td[id^="td_cmt_"]')
 
-    wine_purchase_histories: list[WinePurchaseHistory] = []
+    wine_purchase_histories: List[WinePurchaseHistory] = []
     for (
         raw_date,
         raw_millesime,
@@ -103,7 +103,7 @@ class WineIdLocation(NamedTuple):
     location: str
 
 
-def extract_wine_locations_from_visual_page(visual_page: str) -> list[WineIdLocation]:
+def extract_wine_locations_from_visual_page(visual_page: str) -> List[WineIdLocation]:
     BOX_CSS_REF = "div.bottle-box"
     WINE_IN_BOX_CSS_REF = "td div div"
     UNKNOWN_LOCATION_CSS_REF = "div#unPlacedList ul#list_wine li"
@@ -112,7 +112,7 @@ def extract_wine_locations_from_visual_page(visual_page: str) -> list[WineIdLoca
 
     location_boxes = page.select(BOX_CSS_REF)
 
-    wine_location_list: list[WineIdLocation] = [
+    wine_location_list: List[WineIdLocation] = [
         WineIdLocation(wine_id=wine.attrs["id"], location=box.h4.text)
         for box in location_boxes
         for wine in box.select(WINE_IN_BOX_CSS_REF)
@@ -131,7 +131,7 @@ def extract_wine_locations_from_visual_page(visual_page: str) -> list[WineIdLoca
 
 def get_wine_ref(
     wine_information: WineInfoApi,
-) -> tuple[str, str]:
+) -> Tuple[str, str]:
     """
     Return the url and millesime
     """

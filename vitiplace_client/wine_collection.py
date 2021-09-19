@@ -1,9 +1,11 @@
 import json
+from typing import Dict, List
+
 from vitiplace_client import parser, website_view, model
 
 
 class WineCollection:
-    def __init__(self, wines: list[model.Wine] = None):
+    def __init__(self, wines: List[model.Wine] = None):
         self.wines = wines
 
     def backup(self, path: str):
@@ -49,7 +51,7 @@ class VitiplaceWineCollection:
         password: str = None,
         # Avoid to recompute some steps
         wines_by_url=None,
-        cache_wine_details: dict[int, model.WineInfoApi] = None,
+        cache_wine_details: Dict[int, model.WineInfoApi] = None,
     ):
         self.vitiplace_view = website_view.VitiplaceView(email=email, password=password)
         self.wines_by_url = wines_by_url if wines_by_url else {}

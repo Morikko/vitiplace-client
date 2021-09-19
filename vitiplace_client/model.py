@@ -1,4 +1,5 @@
-from typing import TypedDict, Optional
+from typing import Optional, Dict, List
+from typing_extensions import TypedDict
 
 
 class WineMillesime(TypedDict):
@@ -11,7 +12,7 @@ class WineMillesime(TypedDict):
     ready_year: Optional[int]
     best_year: Optional[int]
     limit_year: Optional[int]
-    locations: dict[str, int]
+    locations: Dict[str, int]
 
 
 class WinePurchaseHistory(TypedDict):
@@ -32,8 +33,8 @@ class Wine(TypedDict):
     appellation: str
     type: str
 
-    millesimes: dict[int, WineMillesime]
-    purchase_history: list[WinePurchaseHistory]
+    millesimes: Dict[int, WineMillesime]
+    purchase_history: List[WinePurchaseHistory]
 
 
 API_NO_YEAR_PLACEHOLDER = "-"
